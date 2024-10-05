@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/dangnhap.css">
+    <!-- <link rel="stylesheet" href="../js/dangnhap.js"> -->
+    <!-- <link rel="stylesheet" href="./assets/font/themify-icons/themify-icons.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />    
+
+</head>
+<script>
+    
+
+    
+    function checkdangnhap(e) {
+        
+        event.preventDefault();
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        if(!username || !password)
+        {
+            alert("Vui lòng điền đầy đủ thông tin đăng nhập!");
+            return false;
+        }
+
+        if(username=='admin' && password=='admin') //ADMIN
+                {
+                    alert('Welcome admin ^^');
+                    // Sau khi đăng nhập thành công
+                    localStorage.setItem('loggedIn', true); //Trang thai dang nhap 
+                    localStorage.setItem('currentUser', username); // Lưu tên người dùng hiện tại (tùy chọn)
+
+                    window.location.href = "./base.html";
+                    return true;
+                }
+
+        var usersDataArray = JSON.parse(localStorage.getItem('usersDataArray'));
+        if(usersDataArray)
+        {
+        
+            for(i=0;i<usersDataArray.length;i++)
+            {
+    
+                if(usersDataArray[i].username === username && usersDataArray[i].password === password)
+                {
+        
+                    var id=i; //Luu lai id cua user
+                    alert('Đăng nhập thành công ');
+                    // Sau khi đăng nhập thành công
+                    localStorage.setItem('loggedIn', true); //Trang thai dang nhap
+                    localStorage.setItem('currentUser', username); // Lưu tên người dùng hiện tại (tùy chọn)
+                    var userlogin = { 
+                                userId: usersDataArray[id].userId,
+                                username: username,
+                                password: password ,
+                                email: usersDataArray[id].email ,
+                                address: usersDataArray[id].address,
+                                fullname: usersDataArray[id].fullname,
+                                phonenumber: usersDataArray[id].phonenumber        
+                                };
+
+                    localStorage.setItem('userLogin',JSON.stringify(userlogin));    // Luu lai thong tin dang nhap user
+                    window.location.href = "./base.html";
+                    return true;
+                }
+                
+                
+            }
+                    alert('Username hoặc password không đúng!');
+                    return false;
+            
+            // console.log(usersDataArray);
+        }
+        else{
+            alert("Tài khoản không tồn tại!");
+            return false;
+        }
+        return true;
+    }
+
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById('password');
+      var showPasswordIcon = document.getElementById('showPasswordIcon');
+
+      // Thay đổi thuộc tính type của trường mật khẩu
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        showPasswordIcon.textContent = "👁️"; // Khi hiển thị mật khẩu, bạn có thể sử dụng emoji khác
+      } else {
+        passwordInput.type = "text";
+        passwordInput.type = "password";
+        showPasswordIcon.textContent = "👁️"; // Khi ẩn mật khẩu, bạn có thể sử dụng emoji khác
+      }
+    }
+
+    // Quen mat khau
+    function refershpass(){
+        // alert("Chức năng đang phát triển !");
+        document.querySelector(".modal-fogotpass").style.display = "flex";
+
+    }
+
+    function closefogotpass(){
+        document.querySelector(".modal-fogotpass").style.display = "none";
+    }
+
+    function updatepass(e){
+        event.preventDefault();
+        var usersDataArray = JSON.parse(localStorage.getItem('usersDataArray'));
+        var username=document.getElementById('username-fogot').value;
+        var password=document.getElementById('password-fogot').value;
+        var repassword=document.getElementById('repassword-fogot').value;
+
+        if(!username || !password || !repassword){
+            alert('Vui lòng điền đủ thông tin');
+            return false;
+        }
+        if(password !== repassword) {
+            alert("Mật khẩu mới không khớp");
+            return false;
+        }
+
+        
+        if(usersDataArray){
+            for(var i = 0; i < usersDataArray.length;i++)
+            {
+                if(usersDataArray[i].username===username){
+                    // console.log("username");
+                    usersDataArray[i].password=password;
+                    localStorage.setItem('usersDataArray', JSON.stringify(usersDataArray));
+                    alert("Đã cập nhật thành công");
+                    document.querySelector(".modal-fogotpass").style.display = "none";
+                    return true;
+                }
+            }
+            alert("Username không đúng !");
+            return false;
+            
+        }
+        else{
+            alert("Vui lòng đăng kí tài khoản ! ");
+            return false;
+        }
+
+    }
+
+</script>
+<body>
+    <div class="wapper-dangnhap">
+
+        <form action=""  onsubmit="checkdangnhap();" name="form-dangnhap">
+
+                <h1>ĐĂNG NHẬP</h1>
+
+                <div class="input">
+
+                    <div class="input-form">
+                        <span class="text">Username</span>
+                        <input type="text" id="username" name="" class="input-box">
+                    </div>
+
+
+
+                    <div class="input-form">
+                        <span  class="text">Password</span>
+                        <input type="password" id="password" name="" class="input-box">
+                        <span id="showPasswordIcon" onclick="togglePasswordVisibility()">👁️</span>
+
+                    </div>
+    
+                    
+                    <a class="forgot" onclick="refershpass();">Quên mật khẩu ?</a>
+
+                </div>
+
+                
+                <div class="icon">
+                    <a href=""><i class="icon-item fab fa-facebook"></i></a>
+                    <a href=""><i class="icon-item fab fa-twitter"></i></a>
+                    <a href=""><i class="icon-item fab fa-google"></i></a>
+                </div>
+
+                <span>Trở lại trang đăng kí ?<a href="./dangki.html"> Đăng kí </a></span>
+                
+                
+                <div class="form-btn">
+                    <button type="submit"  name="" class="btn-dangky">ĐĂNG NHẬP</button>
+                </div>
+
+                <p><a href="./base.html">TRANG CHỦ</a></p>
+
+           
+        </form>
+    </div>
+
+
+    <div class="modal-fogotpass"  style="display: none;">
+            
+        <div class="container-fogotpass">
+            <div class="header-fogotpass">
+                Quên mật khẩu
+                <div class="close-formdon" onclick="closefogotpass();" >
+                    <i class=" icon-close fas fa-window-close"></i>
+                </div>
+            </div>
+            
+
+            <hr>
+
+            <div class="body-fogotpass">
+                <div class="input-form">
+                    <span class="text">Username</span>
+                    <input type="text" id="username-fogot" name="" class="input-box">
+                </div>
+                <div class="input-form">
+                    <span  class="text">Password</span>
+                    <input type="password" id="password-fogot" name="" class="input-box">
+                    
+                </div>
+                <div class="input-form">
+                    <span  class="text">Repassword</span>
+                    <input type="password" id="repassword-fogot" name="" class="input-box">
+                    
+                </div>
+            </div>
+
+            <div class="btnmodal-fogotpass">
+                <button type="button" class="btn-fogotpass" onclick="updatepass();">Cập nhật mật khẩu</button>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

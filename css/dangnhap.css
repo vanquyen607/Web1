@@ -1,0 +1,200 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.wapper-dangnhap{
+    
+    background-image: linear-gradient( #E3DA02, #2C9407);
+    width: 100%;
+    height: 750px;
+    position: relative;
+}
+
+form{
+    position: absolute;
+    width: 60%;
+    right: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 750px;
+    border-top-left-radius:70px;
+    border-bottom-left-radius:70px;
+}
+
+h1{
+    margin-top: 40px;
+    color: #42e70c;
+}
+
+.input{
+     margin-top: 40px;
+     /* margin-bottom: 40px; */
+
+}
+.input-form{
+    margin: 30px 0;
+    position: relative;
+
+
+}
+span#showPasswordIcon {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    margin-right: 10px;
+}
+
+span{
+    margin-top: 15px;
+}
+
+.input-box{
+    display: block;
+    width:400px;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+.input-box:focus{
+    background-color:#42e70c ;
+    /* border-color: #42e70c; */
+    /* border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25); */
+}
+.icon{
+    margin-bottom: 10px;
+
+}
+.icon-item{
+    margin: 0 10px;
+    font-size: 26px;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: black;
+}
+
+
+
+.form-btn{
+    
+
+}
+
+.btn-dangky{
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #42e70c;
+    border: 1px solid #42e70c;
+    color: black;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-dangky:hover {
+    opacity: 0.8;
+}
+
+.forgot{
+    margin-bottom: 26px;
+    cursor: pointer;
+    float: right;
+}
+
+p {
+    position: absolute;
+    bottom: 40px;
+    color:#42e70c;
+}
+
+/* .input-box:focus {
+    padding-inline-start: 4px;
+    border-color: aqua;
+    border: 3px solid blue;
+} */
+
+.text {
+    font-weight: 600;
+}
+
+/* Responsive */
+
+@media (max-width: 768px){
+    form {
+        position: absolute;
+        width: 85%;
+        right: 0;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 750px;
+        border-top-left-radius: 70px;
+        border-bottom-left-radius: 70px;
+    }
+    .input-box {
+        display: block;
+        width: 300px;
+        height: 40px;
+        border-radius: 10px;
+        margin-top: 10px;
+        padding: 0 10px;
+    }
+}
+
+/* Quen mat khau */
+.modal-fogotpass {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-fogotpass {
+    background-color: #fff;
+    width: 500px;
+    height: 450px;
+}
+.header-fogotpass {
+    font-size: 30px;
+    text-align: center;
+    margin: 10px 0;
+    position: relative;
+}
+.body-fogotpass {
+    margin: 10px 50px;
+}
+.btnmodal-fogotpass {
+    text-align: center;
+}
+button.btn-fogotpass {
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+button.btn-fogotpass:hover{
+    background-color: #42e70c;
+}
+.close-formdon {
+    position: absolute;
+    top: -12px;
+    right: 0px;
+    padding: 5px;
+    cursor: pointer;
+}
+.close-formdon:hover{
+    opacity: 0.4;
+}
